@@ -1,0 +1,123 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ==================== PALETA DE COLORES ==================== */
+:root {
+  --color-primary: #1976D2;        /* Primario: Barra lateral, botones principales */
+  --color-secondary: #424242;      /* Secundario: Fondo de sidebar, textos secundarios */
+  --color-success: #388E3C;        /* Éxito: Mensajes de éxito, validaciones */
+  --color-warning: #FBC02D;        /* Advertencia: Alertas, mensajes de advertencia */
+  --color-error: #D32F2F;          /* Error: Mensajes de error, validaciones */
+  --color-light-bg: #F5F5F5;       /* Fondo Claro: Fondo general de la app */
+  --color-dark-bg: #212121;        /* Fondo Oscuro: Fondo de header/footer */
+  --color-white: #FFFFFF;          /* Blanco: Textos y fondos secundarios */
+  --color-gray-light: #E0E0E0;     /* Gris Claro: Bordes, separadores */
+}
+
+/* =========================================================== */
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Puedes mapear tus variables aquí si usas @theme */
+  --color-background: var(--color-light-bg);
+  --color-foreground: var(--color-secondary);
+  --color-card: var(--color-white);
+  --color-card-foreground: var(--color-secondary);
+  --color-popover: var(--color-white);
+  --color-popover-foreground: var(--color-secondary);
+  --color-primary: var(--color-primary);
+  --color-primary-foreground: var(--color-white);
+  --color-secondary: var(--color-secondary);
+  --color-secondary-foreground: var(--color-white);
+  --color-muted: var(--color-gray-light);
+  --color-muted-foreground: var(--color-secondary);
+  --color-accent: var(--color-primary);
+  --color-accent-foreground: var(--color-white);
+  --color-destructive: var(--color-error);
+  --color-border: var(--color-gray-light);
+  --color-input: var(--color-gray-light);
+  --color-ring: var(--color-primary);
+  --color-sidebar: var(--color-secondary);
+  --color-sidebar-foreground: var(--color-white);
+  --color-sidebar-primary: var(--color-primary);
+  --color-sidebar-primary-foreground: var(--color-white);
+  --color-sidebar-accent: var(--color-warning);
+  --color-sidebar-accent-foreground: var(--color-secondary);
+  --color-sidebar-border: var(--color-gray-light);
+  --color-sidebar-ring: var(--color-primary);
+}
+
+/* ================================================================== */
+/* ¡CORRECCIÓN! Se reemplazó oklch por hsl para compatibilidad con PDF */
+/* ================================================================== */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--color-light-bg); /* Fondo general */
+    color: var(--color-secondary);           /* Texto principal */
+    margin: 0;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+}
+
+/* Custom animations */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+  animation: shimmer 3s infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-gray-light);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a8a8a8;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+.bg-primary { background-color: var(--color-primary) !important; }
+.bg-success { background-color: var(--color-success) !important; }
+.bg-warning { background-color: var(--color-warning) !important; }
+.bg-error { background-color: var(--color-error) !important; }
+.bg-secondary { background-color: var(--color-secondary) !important; }
+
+.text-primary-foreground { color: var(--color-white) !important; }
+.text-secondary-foreground { color: var(--color-white) !important; }
